@@ -56,7 +56,7 @@
                 <div class="form-group">
                   <label class="pl-2" for="shortDescription">Short Description</label>
                   <textarea #shortDescription="ngModel" minlength="8" required [class.is-invalid]="shortDescription.invalid
-                    && shortDescription.touched" name="shortDescription" cols="30" rows="6" [(ngModel)]="model.shortDescription"
+                    && shortDescription.touched" name="shortDescription" cols="30" rows="7" [(ngModel)]="model.shortDescription"
                     required name="shortDescription" class="form-control" placeholder="A Short description of the payment."></textarea>
 
                   <div *ngIf="shortDescription.invalid && shortDescription.touched" class="pl-0 text-danger">
@@ -72,6 +72,8 @@
         </div>
       </div>
     </div>
+
+
     <div class="col-md-4">
       <div class="card card-user">
         <div class="image">
