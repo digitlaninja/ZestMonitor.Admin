@@ -9,10 +9,13 @@ import { ProposalPaymentsService } from '../services/proposal-payments.service';
     providers: [ProposalPaymentsService]
 })
 export class ProposalPaymentsComponent implements OnInit {
-    // TODO:: create factory
-    model = new ProposalPaymentsModel();
+    public model: ProposalPaymentsModel;
+    private proposalPaymentsService: ProposalPaymentsService;
 
-    constructor(private proposalPaymentsService: ProposalPaymentsService) {}
+    constructor(proposalPaymentsServiec: ProposalPaymentsService) {
+        this.proposalPaymentsService = this.proposalPaymentsService;
+        this.model = new ProposalPaymentsModel();
+    }
 
     ngOnInit() {}
 

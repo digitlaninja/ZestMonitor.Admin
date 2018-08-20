@@ -1,9 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { AdminLayoutRoutes } from './admin-layout.routing';
-import { DashboardComponent } from '../../dashboard/dashboard.component';
 import { UserProfileComponent } from '../../user-profile/user-profile.component';
 import { TableListComponent } from '../../table-list/table-list.component';
 import { TypographyComponent } from '../../typography/typography.component';
@@ -14,6 +13,7 @@ import { ChartsModule } from 'ng2-charts';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrModule } from 'ngx-toastr';
 import { ProposalPaymentsComponent } from '../../proposal-payments/proposal-payments.component';
+import { ProposalPaymentsService } from '../../services/proposal-payments.service';
 
 @NgModule({
     imports: [
@@ -21,11 +21,11 @@ import { ProposalPaymentsComponent } from '../../proposal-payments/proposal-paym
         RouterModule.forChild(AdminLayoutRoutes),
         FormsModule,
         ChartsModule,
+
         NgbModule,
         ToastrModule.forRoot()
     ],
     declarations: [
-        DashboardComponent,
         UserProfileComponent,
         TableListComponent,
         TypographyComponent,
@@ -33,6 +33,7 @@ import { ProposalPaymentsComponent } from '../../proposal-payments/proposal-paym
         MapsComponent,
         NotificationsComponent,
         ProposalPaymentsComponent
-    ]
+    ],
+    providers: [ProposalPaymentsService]
 })
 export class AdminLayoutModule {}

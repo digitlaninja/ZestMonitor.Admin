@@ -9,6 +9,17 @@ import { LoginComponent } from './login/login.component';
 const routes: Routes = [
     {
         path: '',
+        component: AdminLayoutComponent,
+        children: [
+            {
+                path: '',
+                loadChildren:
+                    './layouts/admin-layout/admin-layout.module#AdminLayoutModule'
+            }
+        ]
+    },
+    {
+        path: 'login',
         component: LoginComponent,
         children: [
             {

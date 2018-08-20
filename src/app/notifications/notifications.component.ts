@@ -14,6 +14,7 @@ export class NotificationsComponent implements OnInit {
         switch (color) {
             case 1:
                 this.toastr.info(
+                    // tslint:disable-next-line:max-line-length
                     '<span class="now-ui-icons ui-1_bell-53"></span> Welcome to <b>Now Ui Dashboard</b> - a beautiful freebie for every web developer.',
                     '',
                     {
@@ -27,6 +28,7 @@ export class NotificationsComponent implements OnInit {
                 break;
             case 2:
                 this.toastr.success(
+                    // tslint:disable-next-line:max-line-length
                     '<span class="now-ui-icons ui-1_bell-53"></span> Welcome to <b>Now Ui Dashboard</b> - a beautiful freebie for every web developer.',
                     '',
                     {
@@ -40,6 +42,7 @@ export class NotificationsComponent implements OnInit {
                 break;
             case 3:
                 this.toastr.warning(
+                    // tslint:disable-next-line:max-line-length
                     '<span class="now-ui-icons ui-1_bell-53"></span> Welcome to <b>Now Ui Dashboard</b> - a beautiful freebie for every web developer.',
                     '',
                     {
@@ -53,6 +56,7 @@ export class NotificationsComponent implements OnInit {
                 break;
             case 4:
                 this.toastr.error(
+                    // tslint:disable-next-line:max-line-length
                     '<span class="now-ui-icons ui-1_bell-53"></span> Welcome to <b>Now Ui Dashboard</b> - a beautiful freebie for every web developer.',
                     '',
                     {
@@ -66,6 +70,7 @@ export class NotificationsComponent implements OnInit {
                 break;
             case 5:
                 this.toastr.show(
+                    // tslint:disable-next-line:max-line-length
                     '<span class="now-ui-icons ui-1_bell-53"></span> Welcome to <b>Now Ui Dashboard</b> - a beautiful freebie for every web developer.',
                     '',
                     {
