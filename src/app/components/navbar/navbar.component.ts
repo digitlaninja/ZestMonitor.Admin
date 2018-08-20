@@ -2,7 +2,7 @@ import { Component, OnInit, ElementRef } from '@angular/core';
 import { ROUTES } from '../sidebar/sidebar.component';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { Router } from '@angular/router';
-import Chart from 'chart.js';
+import { AuthService } from '../../_services/auth.service';
 
 @Component({
     selector: 'app-navbar',
@@ -15,12 +15,21 @@ export class NavbarComponent implements OnInit {
     mobile_menu_visible: any = 0;
     private toggleButton: any;
     private sidebarVisible: boolean;
+    private authService: AuthService;
+    private router: Router;
 
     public isCollapsed = true;
 
-    constructor(location: Location, private element: ElementRef, private router: Router) {
+    constructor(
+        location: Location,
+        private element: ElementRef,
+        router: Router,
+        authService: AuthService
+    ) {
         this.location = location;
         this.sidebarVisible = false;
+        this.authService = authService;
+        this.router = router;
     }
 
     ngOnInit() {
@@ -35,6 +44,10 @@ export class NavbarComponent implements OnInit {
                 this.mobile_menu_visible = 0;
             }
         });
+    }
+
+    logout() {
+        this.authService.logout();
     }
 
     collapse() {

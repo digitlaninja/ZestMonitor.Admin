@@ -4,6 +4,7 @@ import { UserLogin } from '../_models/login';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs/Observable';
+import { Router } from '@angular/router';
 
 @Injectable({
     providedIn: 'root'
@@ -11,9 +12,11 @@ import { Observable } from 'rxjs/Observable';
 export class AuthService {
     private config: Config;
     private http: HttpClient;
+    private router: Router;
 
-    constructor(httpClient: HttpClient) {
+    constructor(httpClient: HttpClient, router: Router) {
         this.http = httpClient;
+        this.router = router;
         this.config = new Config();
     }
 
@@ -34,5 +37,15 @@ export class AuthService {
                     })
                 )
         );
+    }
+
+    logout(): void {
+        localStorage.removeItem('token');
+        this.router.navigateByUrl('/login');
+    }
+
+    loggedIn() {
+        const isLoggedIn = !!localStorage.getItem('token');
+        return isLoggedIn;
     }
 }

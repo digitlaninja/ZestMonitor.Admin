@@ -17,21 +17,35 @@
                   <i class="now-ui-icons users_circle-08"></i>
                 </span>
               </div>
-              <input class="form-control" placeholder="username" type="text" [(ngModel)]="model.username" name="username" required>
+              <input #username="ngModel" class="form-control" placeholder="username" type="text" [(ngModel)]="model.username" name="username"
+                required minLength="2">
+
+
             </div>
-            <div class="input-group form-group-no-border input-lg">
-              <div class="input-group-prepend">
-                <span class="input-group-text">
-                  <i class="now-ui-icons text_caps-small"></i>
-                </span>
-              </div>
-              <input class="form-control" placeholder="password" type="password" [(ngModel)]="model.password" name="password" required>
-            </div>
+
           </div>
-          <div class="footer text-center">
-            <button [disabled]="!loginForm.valid" type="submit" class="btn btn-primary btn-round btn-lg btn-block">Login</button>
+          <div class="text-center" *ngIf="username.errors && (username.dirty || username.touched)">
+            <span class="alert-warning">Please enter a valid username.</span>
+          </div>
+          <div class="input-group form-group-no-border input-lg">
+            <div class="input-group-prepend">
+              <span class="input-group-text">
+                <i class="now-ui-icons text_caps-small"></i>
+              </span>
+            </div>
+            <input #password="ngModel" class="form-control" placeholder="password" type="password" [(ngModel)]="model.password" name="password"
+              required>
+          </div>
+          <div class="text-center" *ngIf="password.errors && (password.dirty || password.touched)">
+            <span class="alert-warning">Please enter a valid password.</span>
           </div>
 
+          <div class="footer text-center">
+            <button type="submit" class="btn btn-primary btn-round btn-lg btn-block" [disabled]="!loginForm.valid">Login</button>
+          </div>
+          <div *ngIf="errors" class='text-danger text-center'>
+            <p>{{errors}}</p>
+          </div>
         </form>
       </div>
     </div>
