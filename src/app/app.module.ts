@@ -26,7 +26,6 @@ import { AuthGuard } from './_guards/auth.guard';
         HttpClientModule,
         RouterModule,
         AppRoutingModule,
-
         NgbModule.forRoot()
     ],
     declarations: [AppComponent, AdminLayoutComponent, LoginComponent],

@@ -23,8 +23,10 @@ export class AuthService {
     // Hit Login endpoint, perform login
     // Send response through pipe, and save token to local storage.
     login(model: UserLogin): Observable<void> {
+        if (this.userIsLoggedIn) {
+            this.router.navigateByUrl('/proposal-payments');
+        }
         const url = `${this.config.apiPath}/auth/login`;
-
         return (
             this.http
                 .post(url, model)
@@ -33,6 +35,7 @@ export class AuthService {
                     map((response: any) => {
                         if (response) {
                             localStorage.setItem('token', response.token);
+                            this.router.navigateByUrl('/proposal-payments');
                         }
                     })
                 )
@@ -44,7 +47,7 @@ export class AuthService {
         this.router.navigateByUrl('/login');
     }
 
-    loggedIn() {
+    userIsLoggedIn(): boolean {
         const isLoggedIn = !!localStorage.getItem('token');
         return isLoggedIn;
     }
