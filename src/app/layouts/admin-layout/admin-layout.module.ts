@@ -14,6 +14,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrModule } from 'ngx-toastr';
 import { ProposalPaymentsComponent } from '../../proposal-payments/proposal-payments.component';
 import { ProposalPaymentsService } from '../../services/proposal-payments.service';
+import { AgGridModule } from 'ag-grid-angular';
+import { Config } from '../../config/config';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 @NgModule({
     imports: [
@@ -21,9 +24,10 @@ import { ProposalPaymentsService } from '../../services/proposal-payments.servic
         RouterModule.forChild(AdminLayoutRoutes),
         FormsModule,
         ChartsModule,
-
         NgbModule,
-        ToastrModule.forRoot()
+        ToastrModule.forRoot(),
+        AgGridModule.withComponents([]),
+        NgxDatatableModule
     ],
     declarations: [
         UserProfileComponent,
@@ -34,6 +38,6 @@ import { ProposalPaymentsService } from '../../services/proposal-payments.servic
         NotificationsComponent,
         ProposalPaymentsComponent
     ],
-    providers: [ProposalPaymentsService]
+    providers: [ProposalPaymentsService, Config]
 })
 export class AdminLayoutModule {}

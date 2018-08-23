@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ProposalPaymentsModel } from '../models/ProposalPayments';
+import { ProposalPaymentModel } from '../_models/proposal-payment';
 import { ProposalPaymentsService } from '../services/proposal-payments.service';
-
+import { ToastrService } from 'ngx-toastr';
 @Component({
     selector: 'app-proposal-payments',
     templateUrl: './proposal-payments.component.html',
@@ -9,20 +9,49 @@ import { ProposalPaymentsService } from '../services/proposal-payments.service';
     providers: [ProposalPaymentsService]
 })
 export class ProposalPaymentsComponent implements OnInit {
-    public model: ProposalPaymentsModel;
+    public model: ProposalPaymentModel = {
+        shortDescription: '',
+        hash: ''
+    };
+    public proposalPayments: ProposalPaymentModel[];
     private proposalPaymentsService: ProposalPaymentsService;
+    // public rows: ProposalPaymentModel[];
+    // public columns = [
+    //     { prop: 'hash' },
+    //     { name: 'shortDescription' },
+    //     { name: 'amount' },
+    //     { name: 'expectedPayment' }
+    // ];
+    public page: number;
+    public limit: number;
+    public count: number;
 
-    constructor(proposalPaymentsServiec: ProposalPaymentsService) {
-        this.proposalPaymentsService = this.proposalPaymentsService;
-        this.model = new ProposalPaymentsModel();
+    constructor(
+        proposalPaymentsService: ProposalPaymentsService,
+        private toastr: ToastrService
+    ) {
+        this.proposalPaymentsService = proposalPaymentsService;
     }
 
-    ngOnInit() {}
+    ngOnInit() {
+        this.loadProposalPayments(1, 2);
+    }
+
+    loadProposalPayments(page: number, limit: number) {
+        this.proposalPaymentsService
+            .getPaged(page, limit)
+            .subscribe((proposalPayments: ProposalPaymentModel[]) => {
+                console.log(proposalPayments);
+                // this.rowData = proposalPayments;
+                this.proposalPayments = proposalPayments;
+            });
+    }
 
     onSubmit() {
         console.log(this.model);
         this.proposalPaymentsService.create(this.model).subscribe((data) => {
-            console.log(data);
+            window.location.reload();
+            this.toastr.success('Success!', 'Proposal Payment Added!');
         });
     }
 }
