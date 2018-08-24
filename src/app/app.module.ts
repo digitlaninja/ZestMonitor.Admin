@@ -12,7 +12,7 @@ import { AppComponent } from './app.component';
 
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { AuthService } from './_services/auth.service';
-import { ProposalPaymentsService } from './services/proposal-payments.service';
+import { ProposalPaymentsService } from './_services/proposal-payments.service';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './_guards/auth.guard';

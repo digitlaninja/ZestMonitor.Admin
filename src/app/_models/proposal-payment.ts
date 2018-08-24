@@ -1,4 +1,4 @@
-export interface ProposalPaymentModel {
+export interface ProposalPayment {
     hash: string;
     shortDescription: string;
     amount?: number;

@@ -13,10 +13,11 @@ import { ChartsModule } from 'ng2-charts';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrModule } from 'ngx-toastr';
 import { ProposalPaymentsComponent } from '../../proposal-payments/proposal-payments.component';
-import { ProposalPaymentsService } from '../../services/proposal-payments.service';
+import { ProposalPaymentsService } from '../../_services/proposal-payments.service';
 import { AgGridModule } from 'ag-grid-angular';
 import { Config } from '../../config/config';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { ProposalPaymentsResolver } from '../../_resolvers/proposal-payments-list.resolver';
 
 @NgModule({
     imports: [
@@ -38,6 +39,6 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
         NotificationsComponent,
         ProposalPaymentsComponent
     ],
-    providers: [ProposalPaymentsService, Config]
+    providers: [ProposalPaymentsService, Config, ProposalPaymentsResolver]
 })
 export class AdminLayoutModule {}

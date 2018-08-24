@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ProposalPaymentModel } from '../_models/proposal-payment';
-import { ProposalPaymentsService } from '../services/proposal-payments.service';
+import { ProposalPayment } from '../_models/proposal-payment';
+import { ProposalPaymentsService } from '../_services/proposal-payments.service';
 import { ToastrService } from 'ngx-toastr';
+import { ActivatedRoute } from '@angular/router';
 @Component({
     selector: 'app-proposal-payments',
     templateUrl: './proposal-payments.component.html',
@@ -9,11 +10,11 @@ import { ToastrService } from 'ngx-toastr';
     providers: [ProposalPaymentsService]
 })
 export class ProposalPaymentsComponent implements OnInit {
-    public model: ProposalPaymentModel = {
+    public model: ProposalPayment = {
         shortDescription: '',
         hash: ''
     };
-    public proposalPayments: ProposalPaymentModel[];
+    public proposalPayments: ProposalPayment[];
     private proposalPaymentsService: ProposalPaymentsService;
     // public rows: ProposalPaymentModel[];
     // public columns = [
@@ -26,26 +27,24 @@ export class ProposalPaymentsComponent implements OnInit {
     public limit: number;
     public count: number;
 
-    constructor(
-        proposalPaymentsService: ProposalPaymentsService,
-        private toastr: ToastrService
-    ) {
+    constructor(proposalPaymentsService: ProposalPaymentsService, private toastr: ToastrService, private route: ActivatedRoute) {
         this.proposalPaymentsService = proposalPaymentsService;
     }
 
     ngOnInit() {
-        this.loadProposalPayments(1, 2);
+        this.route.data.subscribe((data) => {
+            this.proposalPayments = data['proposalPayments'].result;
+        });
+        // this.loadProposalPayments(1, 2);
     }
 
-    loadProposalPayments(page: number, limit: number) {
-        this.proposalPaymentsService
-            .getPaged(page, limit)
-            .subscribe((proposalPayments: ProposalPaymentModel[]) => {
-                console.log(proposalPayments);
-                // this.rowData = proposalPayments;
-                this.proposalPayments = proposalPayments;
-            });
-    }
+    // loadProposalPayments(page: number, limit: number) {
+    //     this.proposalPaymentsService.getPaged(page, limit).subscribe((proposalPayments: ProposalPayment[]) => {
+    //         console.log(proposalPayments);
+    //         // this.rowData = proposalPayments;
+    //         this.proposalPayments = proposalPayments;
+    //     });
+    // }
 
     onSubmit() {
         console.log(this.model);
