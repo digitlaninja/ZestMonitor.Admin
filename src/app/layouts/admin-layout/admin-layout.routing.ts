@@ -5,5 +5,6 @@ import { ProposalPaymentsResolver } from '../../_resolvers/proposal-payments-lis
 
 export const AdminLayoutRoutes: Routes = [
     { path: '', component: ProposalPaymentsComponent },
+    { path: '/', component: ProposalPaymentsComponent },
     { path: 'proposal-payments', component: ProposalPaymentsComponent, resolve: { proposalPayments: ProposalPaymentsResolver } }
 ];

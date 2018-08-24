@@ -10,7 +10,7 @@ import { ToastrService } from 'ngx-toastr';
 @Injectable()
 export class ProposalPaymentsResolver implements Resolve<ProposalPayment[]> {
     pageNumber = 1;
-    pageSize = 1;
+    pageSize = 10;
 
     constructor(private proposalPaymentsService: ProposalPaymentsService, private router: Router, private toastr: ToastrService) {}
 

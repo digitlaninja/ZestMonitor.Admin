@@ -3,6 +3,7 @@ import { ProposalPayment } from '../_models/proposal-payment';
 import { ProposalPaymentsService } from '../_services/proposal-payments.service';
 import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute } from '@angular/router';
+import { Pagination, PaginatedResult } from '../_models/pagination';
 @Component({
     selector: 'app-proposal-payments',
     templateUrl: './proposal-payments.component.html',
@@ -14,15 +15,11 @@ export class ProposalPaymentsComponent implements OnInit {
         shortDescription: '',
         hash: ''
     };
+
+    public pagination: Pagination;
     public proposalPayments: ProposalPayment[];
     private proposalPaymentsService: ProposalPaymentsService;
-    // public rows: ProposalPaymentModel[];
-    // public columns = [
-    //     { prop: 'hash' },
-    //     { name: 'shortDescription' },
-    //     { name: 'amount' },
-    //     { name: 'expectedPayment' }
-    // ];
+
     public page: number;
     public limit: number;
     public count: number;
@@ -34,17 +31,27 @@ export class ProposalPaymentsComponent implements OnInit {
     ngOnInit() {
         this.route.data.subscribe((data) => {
             this.proposalPayments = data['proposalPayments'].result;
+            // bind pagination data from pagination key in header
+            this.pagination = data['proposalPayments'].pagination;
         });
         // this.loadProposalPayments(1, 2);
     }
 
-    // loadProposalPayments(page: number, limit: number) {
-    //     this.proposalPaymentsService.getPaged(page, limit).subscribe((proposalPayments: ProposalPayment[]) => {
-    //         console.log(proposalPayments);
-    //         // this.rowData = proposalPayments;
-    //         this.proposalPayments = proposalPayments;
-    //     });
-    // }
+    pageChanged(event: any): void {
+        this.pagination.currentPage = event.page;
+        this.loadProposalPayments();
+        console.log(this.pagination.currentPage);
+    }
+
+    loadProposalPayments(): void {
+        this.proposalPaymentsService
+            .getPaged(this.pagination.currentPage, this.pagination.itemsPerPage)
+            .subscribe((res: PaginatedResult<ProposalPayment[]>) => {
+                // this.rowData = proposalPayments;
+                this.proposalPayments = res.result;
+                this.pagination = res.pagination;
+            });
+    }
 
     onSubmit() {
         console.log(this.model);

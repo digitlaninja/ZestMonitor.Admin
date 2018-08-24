@@ -10,13 +10,14 @@ import { IconsComponent } from '../../icons/icons.component';
 import { MapsComponent } from '../../maps/maps.component';
 import { NotificationsComponent } from '../../notifications/notifications.component';
 import { ChartsModule } from 'ng2-charts';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrModule } from 'ngx-toastr';
 import { ProposalPaymentsComponent } from '../../proposal-payments/proposal-payments.component';
 import { ProposalPaymentsService } from '../../_services/proposal-payments.service';
 import { AgGridModule } from 'ag-grid-angular';
 import { Config } from '../../config/config';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { PaginationModule, PaginationConfig } from 'ngx-bootstrap';
 import { ProposalPaymentsResolver } from '../../_resolvers/proposal-payments-list.resolver';
 
 @NgModule({
@@ -27,6 +28,7 @@ import { ProposalPaymentsResolver } from '../../_resolvers/proposal-payments-lis
         ChartsModule,
         NgbModule,
         ToastrModule.forRoot(),
+        PaginationModule,
         AgGridModule.withComponents([]),
         NgxDatatableModule
     ],
@@ -39,6 +41,6 @@ import { ProposalPaymentsResolver } from '../../_resolvers/proposal-payments-lis
         NotificationsComponent,
         ProposalPaymentsComponent
     ],
-    providers: [ProposalPaymentsService, Config, ProposalPaymentsResolver]
+    providers: [ProposalPaymentsService, Config, ProposalPaymentsResolver, PaginationConfig]
 })
 export class AdminLayoutModule {}
