@@ -19,6 +19,7 @@ export class ProposalPaymentsComponent implements OnInit {
     public pagination: Pagination;
     public proposalPayments: ProposalPayment[];
     private proposalPaymentsService: ProposalPaymentsService;
+    public proposalPaymentsParams: any = {};
 
     public page: number;
     public limit: number;
@@ -34,7 +35,6 @@ export class ProposalPaymentsComponent implements OnInit {
             // bind pagination data from pagination key in header
             this.pagination = data['proposalPayments'].pagination;
         });
-        // this.loadProposalPayments(1, 2);
     }
 
     pageChanged(event: any): void {
