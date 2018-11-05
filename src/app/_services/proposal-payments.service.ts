@@ -4,15 +4,18 @@ import { ProposalPayment } from '../_models/proposal-payment';
 import { Config } from '../config/config';
 import { Observable } from 'rxjs/observable';
 import { PaginatedResult } from '../_models/pagination';
-import { map } from 'rxjs/operators';
+import { map, catchError } from 'rxjs/operators';
+import { AuthService } from './auth.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable()
 export class ProposalPaymentsService {
     private url = `${this.config.apiPath}/proposalpayments`;
-    constructor(private http: HttpClient, private config: Config) {}
+    constructor(private http: HttpClient, private authService: AuthService, private config: Config, private toastr: ToastrService) {}
 
     public create(model: ProposalPayment): Observable<any> {
-        return this.http.post<any>(this.url, model);
+        const headers = this.authService.createAuthHeader();
+        return this.http.post<any>(this.url, model, { headers });
     }
 
     public getPaged(page?, itemsPerPage?): Observable<PaginatedResult<ProposalPayment[]>> {

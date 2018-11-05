@@ -26,9 +26,7 @@ export class LoginComponent implements OnInit {
     login() {
         // console.log(this.model);
         this.authService.login(this.model).subscribe(
-            (response: any) => {
-                console.log('Logged in successfully');
-            },
+            (response: any) => {},
             (errors) => {
                 if (errors instanceof HttpErrorResponse) {
                     if (errors.status === 401) {

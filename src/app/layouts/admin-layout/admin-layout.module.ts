@@ -19,6 +19,7 @@ import { Config } from '../../config/config';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { PaginationModule, PaginationConfig } from 'ngx-bootstrap';
 import { ProposalPaymentsResolver } from '../../_resolvers/proposal-payments-list.resolver';
+import { ButtonsModule } from 'ngx-bootstrap/buttons';
 
 @NgModule({
     imports: [
@@ -29,6 +30,7 @@ import { ProposalPaymentsResolver } from '../../_resolvers/proposal-payments-lis
         NgbModule,
         ToastrModule.forRoot(),
         PaginationModule,
+        ButtonsModule.forRoot(),
         AgGridModule.withComponents([]),
         NgxDatatableModule
     ],

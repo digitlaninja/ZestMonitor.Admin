@@ -3,5 +3,5 @@ export interface ProposalPayment {
     shortDescription: string;
     amount?: number;
     expectedPayment?: number;
-    dateCreated?: string;
+    createdAt?: string;
 }

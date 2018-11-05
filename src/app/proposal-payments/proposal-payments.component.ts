@@ -4,6 +4,7 @@ import { ProposalPaymentsService } from '../_services/proposal-payments.service'
 import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute } from '@angular/router';
 import { Pagination, PaginatedResult } from '../_models/pagination';
+import { HttpErrorResponse } from '@angular/common/http';
 @Component({
     selector: 'app-proposal-payments',
     templateUrl: './proposal-payments.component.html',
@@ -19,6 +20,7 @@ export class ProposalPaymentsComponent implements OnInit {
     public pagination: Pagination;
     public proposalPayments: ProposalPayment[];
     private proposalPaymentsService: ProposalPaymentsService;
+    public proposalPaymentsParams: any = {};
 
     public page: number;
     public limit: number;
@@ -34,7 +36,6 @@ export class ProposalPaymentsComponent implements OnInit {
             // bind pagination data from pagination key in header
             this.pagination = data['proposalPayments'].pagination;
         });
-        // this.loadProposalPayments(1, 2);
     }
 
     pageChanged(event: any): void {
@@ -47,17 +48,24 @@ export class ProposalPaymentsComponent implements OnInit {
         this.proposalPaymentsService
             .getPaged(this.pagination.currentPage, this.pagination.itemsPerPage)
             .subscribe((res: PaginatedResult<ProposalPayment[]>) => {
-                // this.rowData = proposalPayments;
                 this.proposalPayments = res.result;
                 this.pagination = res.pagination;
             });
     }
 
     onSubmit() {
-        console.log(this.model);
-        this.proposalPaymentsService.create(this.model).subscribe((data) => {
-            window.location.reload();
-            this.toastr.success('Success!', 'Proposal Payment Added!');
-        });
+        this.proposalPaymentsService.create(this.model).subscribe(
+            (data) => {
+                window.location.reload();
+                this.toastr.success('Success!', 'Proposal Payment Added!');
+            },
+            (errors) => {
+                if (errors instanceof HttpErrorResponse) {
+                    if (errors.status === 401 || errors.status === 400) {
+                        this.toastr.error('Could not create payment, try login again.', 'Sorry');
+                    }
+                }
+            }
+        );
     }
 }

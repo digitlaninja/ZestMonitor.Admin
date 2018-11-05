@@ -25,7 +25,7 @@
 
           </div>
           <div class="text-center" *ngIf="username.errors && (username.dirty || username.touched)">
-            <span class="alert-warning">Please enter a valid username.</span>
+            <span class="text-danger">Please enter a valid username.</span>
           </div>
           <div class="input-group form-group-no-border input-lg">
             <div class="input-group-prepend">
@@ -37,7 +37,7 @@
               required>
           </div>
           <div class="text-center" *ngIf="password.errors && (password.dirty || password.touched)">
-            <span class="alert-warning">Please enter a valid password.</span>
+            <span class="text-danger">Please enter a valid password.</span>
           </div>
 
           <div class="footer text-center">

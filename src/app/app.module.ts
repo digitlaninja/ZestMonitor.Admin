@@ -16,6 +16,7 @@ import { ProposalPaymentsService } from './_services/proposal-payments.service';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './_guards/auth.guard';
+import { ToastrService } from 'ngx-toastr';
 
 @NgModule({
     imports: [
@@ -29,7 +30,7 @@ import { AuthGuard } from './_guards/auth.guard';
         NgbModule.forRoot()
     ],
     declarations: [AppComponent, AdminLayoutComponent, LoginComponent],
-    providers: [AuthService, ProposalPaymentsService, AuthGuard],
+    providers: [AuthService, ProposalPaymentsService, AuthGuard, ToastrService],
     bootstrap: [AppComponent]
 })
 export class AppModule {}
