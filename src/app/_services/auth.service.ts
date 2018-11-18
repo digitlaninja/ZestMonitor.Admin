@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
-import { Config } from '../config/config';
 import { UserLogin } from '../_models/login';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs/Observable';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { environment } from '../../environments/environment';
+
 @Injectable({
     providedIn: 'root'
 })
 export class AuthService {
-    private config: Config;
     private http: HttpClient;
     private router: Router;
     private jwtHelper = new JwtHelperService();
@@ -18,7 +18,6 @@ export class AuthService {
     constructor(httpClient: HttpClient, router: Router) {
         this.http = httpClient;
         this.router = router;
-        this.config = new Config();
     }
 
     // Hit Login endpoint, perform login
@@ -27,7 +26,7 @@ export class AuthService {
         if (this.userIsLoggedIn) {
             this.router.navigateByUrl('/proposal-payments');
         }
-        const url = `${this.config.apiPath}/auth/login`;
+        const url = `${environment.apiUrl}/auth/login`;
         return (
             this.http
                 .post(url, model)

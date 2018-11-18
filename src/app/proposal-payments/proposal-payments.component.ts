@@ -56,13 +56,32 @@ export class ProposalPaymentsComponent implements OnInit {
     onSubmit() {
         this.proposalPaymentsService.create(this.model).subscribe(
             (data) => {
-                window.location.reload();
                 this.toastr.success('Success!', 'Proposal Payment Added!');
+                this.loadProposalPayments();
             },
             (errors) => {
                 if (errors instanceof HttpErrorResponse) {
                     if (errors.status === 401 || errors.status === 400) {
                         this.toastr.error('Could not create payment, try login again.', 'Sorry');
+                    }
+                }
+            }
+        );
+    }
+
+    onDelete(id: number) {
+        const deleteConfirmed = confirm('Are you sure?');
+        if (!deleteConfirmed) return;
+        this.proposalPaymentsService.delete(id).subscribe(
+            (data) => {
+                // window.location.reload();
+                this.toastr.success('Success!', 'Proposal Payment Deleted.');
+                this.loadProposalPayments();
+            },
+            (errors) => {
+                if (errors instanceof HttpErrorResponse) {
+                    if (errors.status === 401 || errors.status === 400) {
+                        this.toastr.error('Could not delete payment, try login again.', 'Sorry');
                     }
                 }
             }

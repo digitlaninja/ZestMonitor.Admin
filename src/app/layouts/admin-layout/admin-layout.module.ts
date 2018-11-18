@@ -15,7 +15,6 @@ import { ToastrModule } from 'ngx-toastr';
 import { ProposalPaymentsComponent } from '../../proposal-payments/proposal-payments.component';
 import { ProposalPaymentsService } from '../../_services/proposal-payments.service';
 import { AgGridModule } from 'ag-grid-angular';
-import { Config } from '../../config/config';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { PaginationModule, PaginationConfig } from 'ngx-bootstrap';
 import { ProposalPaymentsResolver } from '../../_resolvers/proposal-payments-list.resolver';
@@ -43,6 +42,6 @@ import { ButtonsModule } from 'ngx-bootstrap/buttons';
         NotificationsComponent,
         ProposalPaymentsComponent
     ],
-    providers: [ProposalPaymentsService, Config, ProposalPaymentsResolver, PaginationConfig]
+    providers: [ProposalPaymentsService, ProposalPaymentsResolver, PaginationConfig]
 })
 export class AdminLayoutModule {}

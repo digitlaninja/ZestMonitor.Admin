@@ -1,5 +1,4 @@
-export interface ProposalPayment {
-    id?: number;
+export interface ProposalPaymentAdd {
     hash: string;
     shortDescription: string;
     amount?: number;
